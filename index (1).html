@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIKAEWEBS — Pembuatan Website Profesional & Toko Online</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/fricikaesgi/CIKAEWEBS/main/CW.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#820101;--rouge-soft:#9a1818;--blush:#f5ede8;--blush-deep:#edd8cc;
+  --sage:#9BCD5E;--ivory:#fdf8f2;--cream:#f7f0e6;
+  --charcoal:#1a1614;--charcoal-soft:#2d2724;
+  --warm-gray:#8a827a;--warm-gray-light:#c4bdb5;--white:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--ivory);color:var(--charcoal);overflow-x:hidden;cursor:none;}
+.cursor{position:fixed;width:8px;height:8px;background:var(--rouge);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(130,1,1,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+
+/* FLOATING WA */
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:200;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;text-decoration:none;display:flex;align-items:center;gap:.7rem;padding:.85rem 1.5rem;border-radius:50px;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.05em;box-shadow:0 8px 30px rgba(37,211,102,.35);transition:transform .25s,box-shadow .25s;}
+.wa-float:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(37,211,102,.45);}
+.wa-float svg{width:20px;height:20px;flex-shrink:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 4rem;display:flex;align-items:center;justify-content:space-between;transition:background .5s;}
+nav.scrolled{background:rgba(253,248,242,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(130,1,1,.08);}
+.nav-logo img{height:72px;width:auto;display:block;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{color:var(--warm-gray);text-decoration:none;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.75rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;transition:color .25s;}
+.nav-links a:hover{color:var(--rouge);}
+.nav-cta{background:var(--rouge) !important;color:var(--white) !important;padding:.65rem 1.6rem;}
+.nav-cta:hover{background:var(--rouge-soft) !important;}
+
+/* ========================================
+   MOBILE HAMBURGER
+======================================== */
+
+.nav-toggle{
+    display:none;
+    border:0;
+    background:transparent;
+    padding:8px;
+    margin:0;
+    cursor:pointer;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    z-index:1001;
+}
+
+.nav-toggle span{
+    display:block;
+    width:24px;
+    height:2px;
+    background:var(--charcoal);
+    transition:transform .3s ease, opacity .3s ease;
+}
+
+
+/* ========================================
+   MOBILE MENU
+======================================== */
+
+@media (max-width:768px){
+
+    .nav-toggle{
+        display:flex;
+        position:relative;
+        z-index:1001;
+    }
+
+    .nav-links{
+        position:fixed !important;
+
+        top:0 !important;
+        left:0 !important;
+        right:auto !important;
+
+        width:100% !important;
+        height:100vh !important;
+        height:100dvh !important;
+
+        margin:0 !important;
+        padding:0 !important;
+
+        background:rgba(253,248,242,.98) !important;
+        backdrop-filter:blur(16px);
+
+        display:flex !important;
+        flex-direction:column !important;
+        justify-content:center !important;
+        align-items:center !important;
+
+        gap:2rem !important;
+
+        transform:translateX(100%) !important;
+
+        transition:transform .35s ease !important;
+
+        visibility:visible !important;
+        opacity:1 !important;
+
+        z-index:1000 !important;
+    }
+
+    .nav-links.active{
+        transform:translateX(0) !important;
+    }
+
+    .nav-links li{
+        list-style:none;
+        margin:0;
+        padding:0;
+    }
+
+    .nav-links a{
+        font-size:.85rem;
+        letter-spacing:.16em;
+    }
+
+    .nav-cta{
+        padding:.8rem 1.8rem !important;
+    }
+
+
+    /* HAMBURGER → X */
+
+    .nav-toggle.active span:nth-child(1){
+        transform:translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.active span:nth-child(2){
+        opacity:0;
+    }
+
+    .nav-toggle.active span:nth-child(3){
+        transform:translateY(-7px) rotate(-45deg);
+    }
+
+}
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{background:var(--charcoal);display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 4rem 5rem 5rem;position:relative;overflow:hidden;}
+.hero-mesh{position:absolute;inset:0;pointer-events:none;}
+.hero-mesh::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(130,1,1,.55) 0%,transparent 65%);top:-100px;right:-150px;filter:blur(60px);}
+.hero-mesh::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(155,205,94,.18) 0%,transparent 70%);bottom:0;left:-80px;filter:blur(80px);}
+.hero-right{background:var(--blush);display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 4rem 5rem 4rem;position:relative;overflow:hidden;}
+.hero-right-mesh{position:absolute;inset:0;pointer-events:none;}
+.hero-right-mesh::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(130,1,1,.12) 0%,transparent 65%);top:-80px;right:-100px;filter:blur(70px);}
+.hero-right-grid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(130,1,1,.03) 40px,rgba(130,1,1,.03) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(130,1,1,.03) 40px,rgba(130,1,1,.03) 41px);}
+.hero-year{position:absolute;top:8rem;left:5rem;font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.18);letter-spacing:.2em;}
+.hero-location{position:absolute;top:8rem;right:4rem;font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(130,1,1,.4);letter-spacing:.2em;}
+
+/* HERO HEADLINE = HELVETICA NOW */
+.hero-h1{font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:clamp(3.5rem,7.5vw,7rem);font-weight:300;line-height:.96;color:var(--white);position:relative;z-index:1;margin-bottom:2.5rem;letter-spacing:-.02em;}
+.hero-h1 em{font-style:italic;color:var(--blush-deep);font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:300;}
+.hero-sub{font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.85rem;color:rgba(255,255,255,.42);line-height:1.95;font-weight:300;max-width:290px;position:relative;z-index:1;margin-bottom:3rem;}
+.hero-cta-group{display:flex;gap:1.5rem;align-items:center;position:relative;z-index:1;}
+.btn-rouge{background:var(--rouge);color:var(--white);padding:1rem 2.2rem;text-decoration:none;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:background .25s,transform .2s;}
+.btn-rouge:hover{background:var(--rouge-soft);transform:translateY(-2px);}
+.btn-ghost{color:rgba(255,255,255,.4);text-decoration:none;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;transition:color .25s;}
+.btn-ghost:hover{color:var(--white);}
+.hero-right-content{position:relative;z-index:1;}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4.2rem);font-weight:300;font-style:italic;color:var(--rouge);line-height:1.1;margin-bottom:3rem;}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--charcoal);line-height:1;}
+.stat-label{font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.65rem;color:var(--warm-gray);letter-spacing:.1em;text-transform:uppercase;margin-top:.4rem;font-weight:300;}
+.hero-note{font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.73rem;color:var(--warm-gray);font-weight:300;line-height:1.8;border-top:1px solid rgba(130,1,1,.12);padding-top:1.8rem;}
+
+/* TICKER */
+.ticker-wrap{background:var(--rouge);padding:.85rem 0;overflow:hidden;white-space:nowrap;}
+.ticker{display:inline-flex;animation:tick 32s linear infinite;}
+.ticker-item{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;letter-spacing:.08em;color:rgba(255,255,255,.75);padding:0 2.5rem;}
+.ticker-sep{color:rgba(155,205,94,.6);font-style:normal;padding:0 .5rem;}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SHARED */
+section{padding:7rem 5rem;}
+.sl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--rouge);margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem;}
+.sl::before{content:'';width:24px;height:1px;background:var(--rouge);}
+.sl.light{color:rgba(155,205,94,.8);}
+.sl.light::before{background:rgba(155,205,94,.8);}
+.sl.muted{color:var(--blush-deep);}
+.sl.muted::before{background:var(--blush-deep);}
+.st{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,4.5vw,4.5rem);font-weight:300;line-height:1.05;color:var(--charcoal);}
+.st em{font-style:italic;color:var(--rouge);}
+.st.white{color:var(--white);}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ABOUT */
+.about{background:var(--cream);}
+.about-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:8rem;align-items:start;margin-top:5rem;}
+.about-body{font-size:1rem;color:var(--warm-gray);line-height:2;font-weight:300;margin-bottom:1.5rem;}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;font-weight:300;color:var(--charcoal);line-height:1.55;border-left:2px solid var(--rouge);padding-left:2rem;margin-top:2.5rem;}
+.value-item{padding:1.8rem 0;border-bottom:1px solid rgba(130,1,1,.1);}
+.value-item:first-child{border-top:1px solid rgba(130,1,1,.1);}
+.v-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.2em;color:var(--rouge);margin-bottom:.6rem;text-transform:uppercase;}
+.v-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;margin-bottom:.45rem;color:var(--charcoal);}
+.v-text{font-size:.83rem;color:var(--warm-gray);line-height:1.85;font-weight:300;}
+
+/* SERVICES */
+.services{background:var(--charcoal);position:relative;overflow:hidden;}
+.svc-mesh{position:absolute;inset:0;pointer-events:none;}
+.svc-mesh::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(130,1,1,.2) 0%,transparent 65%);top:-200px;right:-200px;filter:blur(80px);}
+.svc-mesh::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(155,205,94,.07) 0%,transparent 70%);bottom:-100px;left:-100px;filter:blur(90px);}
+.services-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5rem;flex-wrap:wrap;gap:2rem;position:relative;z-index:1;}
+.services-intro{font-size:.88rem;color:rgba(255,255,255,.32);font-weight:300;max-width:340px;line-height:1.95;margin-top:1.5rem;}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04);position:relative;z-index:1;}
+.svc-card{background:rgba(26,22,20,.95);padding:2.5rem 2rem 2rem;position:relative;transition:background .35s;overflow:hidden;}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--rouge),rgba(155,205,94,.6));transition:width .4s ease;}
+.svc-card:hover{background:rgba(130,1,1,.1);}
+.svc-card:hover::after{width:100%;}
+.svc-n{font-family:'DM Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.15);letter-spacing:.12em;margin-bottom:2.5rem;}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-weight:400;color:var(--white);margin-bottom:.75rem;line-height:1.3;}
+.svc-text{font-size:.78rem;color:rgba(255,255,255,.3);line-height:1.85;font-weight:300;}
+.svc-arrow{position:absolute;bottom:1.8rem;right:1.8rem;font-size:.9rem;color:var(--rouge);opacity:0;transition:opacity .3s,transform .3s;}
+.svc-card:hover .svc-arrow{opacity:1;transform:translate(3px,-3px);}
+
+/* WORKFLOW */
+.workflow{background:var(--blush);position:relative;overflow:hidden;}
+.wf-mesh{position:absolute;inset:0;pointer-events:none;}
+.wf-mesh::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(130,1,1,.08) 0%,transparent 65%);top:-100px;right:-100px;filter:blur(80px);}
+.workflow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4rem;margin-top:5rem;position:relative;z-index:1;}
+.wf-num{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:300;color:rgba(130,1,1,.1);line-height:1;margin-bottom:1.5rem;}
+.wf-line{width:24px;height:1px;background:var(--rouge);margin-bottom:1.5rem;}
+.wf-title{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;color:var(--charcoal);margin-bottom:.7rem;}
+.wf-text{font-size:.8rem;color:var(--warm-gray);line-height:1.9;font-weight:300;}
+
+/* PORTFOLIO */
+.portfolio{background:var(--charcoal);overflow:hidden;position:relative;}
+.port-mesh{position:absolute;inset:0;pointer-events:none;}
+.port-mesh::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(155,205,94,.06) 0%,transparent 65%);top:-100px;left:-100px;filter:blur(90px);}
+.port-mesh::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(130,1,1,.15) 0%,transparent 70%);bottom:-50px;right:-50px;filter:blur(80px);}
+.portfolio-intro{max-width:520px;margin-top:1.5rem;font-size:.88rem;color:rgba(255,255,255,.35);line-height:1.95;font-weight:300;position:relative;z-index:1;}
+.portfolio-tabs{display:flex;margin-top:4rem;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;position:relative;z-index:1;scrollbar-width:none;}
+.portfolio-tabs::-webkit-scrollbar{display:none;}
+.ptab{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);padding:1rem 2rem;cursor:pointer;border:none;background:none;transition:color .25s;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;}
+.ptab:hover{color:rgba(255,255,255,.55);}
+.ptab.active{color:var(--white);border-bottom-color:var(--rouge);}
+.portfolio-panels{position:relative;z-index:1;}
+.ppanel{display:none;padding-top:3.5rem;}
+.ppanel.active{display:block;}
+
+/* PROJECT CARDS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);}
+.proj-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.04);}
+.proj-featured{display:grid;grid-template-columns:1.3fr 1fr;gap:1px;background:rgba(255,255,255,.04);margin-bottom:1px;}
+.proj-card{background:rgba(26,22,20,.95);padding:2.5rem;position:relative;overflow:hidden;cursor:pointer;transition:background .3s;}
+.proj-card:hover{background:rgba(130,1,1,.12);}
+.proj-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(130,1,1,.05) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
+.proj-card:hover::before{opacity:1;}
+.proj-type{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rouge);margin-bottom:1.2rem;}
+.proj-brand{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.5rem;line-height:1.1;}
+.proj-tag{font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.68rem;color:rgba(255,255,255,.25);font-weight:300;margin-bottom:1.2rem;}
+.proj-desc{font-size:.78rem;color:rgba(255,255,255,.32);line-height:1.85;font-weight:300;}
+.proj-num{position:absolute;top:2rem;right:2rem;font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(255,255,255,.04);line-height:1;}
+.proj-open{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(155,205,94,.6);transition:color .25s;}
+.proj-card:hover .proj-open{color:var(--sage);}
+.proj-open .arr{transition:transform .25s;display:inline-block;}
+.proj-card:hover .arr{transform:translate(3px,-3px);}
+.portfolio-cta{margin-top:4rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+.portfolio-cta-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:rgba(255,255,255,.4);}
+.btn-outline-light{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.55);text-decoration:none;padding:.8rem 1.8rem;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:400;transition:all .25s;}
+.btn-outline-light:hover{border-color:var(--rouge);color:var(--white);background:rgba(130,1,1,.1);}
+
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;background:rgba(8,6,5,.94);z-index:500;display:none;align-items:flex-start;justify-content:center;padding:2rem;overflow-y:auto;backdrop-filter:blur(10px);}
+.modal-backdrop.open{display:flex;}
+.modal{background:var(--charcoal-soft);width:100%;max-width:760px;position:relative;margin:auto;}
+.modal-header{padding:3rem 3rem 2rem;position:relative;overflow:hidden;}
+.modal-header::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(130,1,1,.3) 0%,transparent 65%);top:-150px;right:-100px;filter:blur(60px);pointer-events:none;}
+.modal-header::after{content:'';position:absolute;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(155,205,94,.1) 0%,transparent 70%);bottom:-80px;left:-60px;filter:blur(50px);pointer-events:none;}
+.modal-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s;z-index:1;}
+.modal-close:hover{border-color:var(--rouge);color:var(--white);}
+.modal-type{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rouge);margin-bottom:1rem;position:relative;z-index:1;}
+.modal-brand{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:var(--white);margin-bottom:.4rem;line-height:1;position:relative;z-index:1;}
+.modal-sub{font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;position:relative;z-index:1;}
+
+/* SLIDE VIEWER */
+.slide-viewer{position:relative;background:#000;overflow:hidden;}
+.slide-viewer img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;}
+.slide-nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;width:100%;padding:0 1rem;pointer-events:none;}
+.slide-btn{pointer-events:all;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:background .2s,color .2s;}
+.slide-btn:hover{background:var(--rouge);color:#fff;border-color:var(--rouge);}
+.slide-counter{position:absolute;bottom:.75rem;right:1rem;font-family:'DM Mono',monospace;font-size:.55rem;color:rgba(255,255,255,.4);letter-spacing:.1em;background:rgba(0,0,0,.4);padding:.25rem .6rem;border-radius:20px;}
+.slide-dots{display:flex;justify-content:center;gap:.4rem;padding:.75rem;background:rgba(0,0,0,.3);}
+.slide-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:background .2s;border:none;padding:0;}
+.slide-dot.active{background:var(--rouge);}
+
+.modal-body{padding:0 3rem 3rem;}
+.modal-divider{height:1px;background:rgba(255,255,255,.06);margin-bottom:2rem;}
+.modal-desc{font-size:.88rem;color:rgba(255,255,255,.55);line-height:2;font-weight:300;margin-bottom:2rem;}
+.modal-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;}
+.modal-tag{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--sage);border:1px solid rgba(155,205,94,.2);padding:.3rem .85rem;}
+.modal-wa{display:inline-flex;align-items:center;gap:.7rem;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;text-decoration:none;padding:.85rem 1.8rem;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.73rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;transition:transform .2s,box-shadow .2s;}
+.modal-wa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3);}
+
+/* PRICING */
+.pricing{background:var(--ivory);}
+.pricing-subtitle{font-size:.88rem;color:var(--warm-gray);max-width:420px;line-height:1.95;font-weight:300;margin-top:1.5rem;}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:5rem;}
+.pkg{background:var(--white);border:1px solid rgba(130,1,1,.08);padding:2.5rem 2rem;position:relative;transition:transform .3s,box-shadow .3s;}
+.pkg:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(130,1,1,.07);}
+.pkg.hero-pkg{background:var(--charcoal);border-color:var(--charcoal);}
+.pkg-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--rouge);color:var(--white);font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;padding:.32rem 1.1rem;white-space:nowrap;}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:300;color:var(--charcoal);margin-bottom:.5rem;}
+.pkg.hero-pkg .pkg-name{color:var(--white);}
+.pkg-tagline{font-size:.76rem;color:var(--warm-gray);font-weight:300;line-height:1.6;margin-bottom:1.8rem;min-height:2.4rem;}
+.pkg.hero-pkg .pkg-tagline{color:rgba(255,255,255,.32);}
+.pkg-price{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:300;color:var(--rouge);line-height:1;margin-bottom:.3rem;}
+.pkg-period{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--warm-gray-light);letter-spacing:.15em;text-transform:uppercase;padding-bottom:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(130,1,1,.08);}
+.pkg.hero-pkg .pkg-period{border-color:rgba(255,255,255,.06);}
+.pkg-feat{font-size:.76rem;color:var(--warm-gray);padding:.55rem 0;border-bottom:1px solid rgba(130,1,1,.05);display:flex;gap:.65rem;line-height:1.5;}
+.pkg.hero-pkg .pkg-feat{color:rgba(255,255,255,.42);border-color:rgba(255,255,255,.05);}
+.pkg-feat span{color:var(--rouge);flex-shrink:0;}
+.pkg.hero-pkg .pkg-feat span{color:var(--sage);}
+.pkg-btn{display:block;text-align:center;margin-top:1.8rem;padding:.88rem;text-decoration:none;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:400;border:1px solid var(--charcoal);color:var(--charcoal);transition:all .25s;}
+.pkg-btn:hover{background:var(--charcoal);color:var(--white);}
+.pkg.hero-pkg .pkg-btn{background:var(--rouge);color:var(--white);border-color:var(--rouge);}
+.pkg.hero-pkg .pkg-btn:hover{background:var(--rouge-soft);}
+
+/* CONTACT */
+.contact{background:var(--charcoal);position:relative;overflow:hidden;}
+.contact-mesh{position:absolute;inset:0;pointer-events:none;}
+.contact-mesh::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(130,1,1,.2) 0%,transparent 65%);top:-150px;right:-100px;filter:blur(80px);}
+.contact-mesh::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(155,205,94,.06) 0%,transparent 70%);bottom:-80px;left:-80px;filter:blur(70px);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:7rem;align-items:start;margin-top:5rem;position:relative;z-index:1;}
+.contact-body{font-size:.88rem;color:rgba(255,255,255,.35);line-height:2;font-weight:300;margin-bottom:3rem;max-width:320px;}
+.contact-detail{display:flex;gap:1.5rem;margin-bottom:1.5rem;align-items:flex-start;}
+.cd-label{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.2em;color:rgba(255,255,255,.18);text-transform:uppercase;min-width:60px;margin-top:.15rem;flex-shrink:0;}
+.cd-val{font-size:.83rem;color:rgba(255,255,255,.52);}
+.cd-val a{color:var(--sage);text-decoration:none;}
+.cd-val a:hover{color:#b8d98a;}
+.cd-val.small{font-size:.75rem;line-height:1.7;}
+.fl{display:block;font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:.55rem;}
+.fi,.fsel,.fta{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--white);font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.85rem;font-weight:300;padding:.9rem 1.1rem;outline:none;transition:border-color .25s;border-radius:0;appearance:none;margin-bottom:1.3rem;}
+.fi:focus,.fsel:focus,.fta:focus{border-color:rgba(155,205,94,.3);}
+.fi::placeholder,.fta::placeholder{color:rgba(255,255,255,.16);}
+.fsel option{background:#2d2724;}
+.fta{min-height:100px;resize:vertical;}
+.fsub{width:100%;background:var(--rouge);color:var(--white);border:none;padding:1.05rem;font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.73rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:background .25s,transform .2s;border-radius:0;}
+.fsub:hover{background:var(--rouge-soft);transform:translateY(-2px);}
+
+/* FOOTER */
+footer{background:#0d0b09;padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.04);flex-wrap:wrap;gap:1.5rem;}
+.footer-logo img{height:64px;width:auto;filter:brightness(0) invert(1);opacity:.7;}
+.footer-copy{font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.7rem;color:rgba(255,255,255,.16);font-weight:300;}
+.footer-links{display:flex;gap:2rem;}
+.footer-links a{font-family:'Helvetica Neue','Helvetica',Arial,sans-serif;font-size:.7rem;color:rgba(255,255,255,.2);text-decoration:none;font-weight:300;transition:color .2s;letter-spacing:.05em;}
+.footer-links a:hover{color:var(--sage);}
+.footer-socials{display:flex;gap:.8rem;}
+.soc{width:32px;height:32px;border:1px solid rgba(255,255,255,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.25);text-decoration:none;font-size:.65rem;font-family:'DM Mono',monospace;transition:border-color .2s,color .2s;}
+.soc:hover{border-color:var(--rouge);color:var(--rouge);}
+
+@media(max-width:1100px){
+  nav{padding:1.2rem 2rem;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:8rem 2.5rem 4rem;}
+  .hero-right{padding:4rem 2.5rem;}
+  section{padding:5rem 2.5rem;}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:3.5rem;}
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .workflow-grid{grid-template-columns:repeat(2,1fr);gap:3rem;}
+  .pricing-grid{grid-template-columns:repeat(2,1fr);}
+  .addons-grid{grid-template-columns:1fr;}
+  .proj-grid,.proj-grid-2{grid-template-columns:1fr 1fr;}
+  .proj-featured{grid-template-columns:1fr;}
+  footer{padding:2rem 2.5rem;}
+  .modal{margin:0;}
+  .modal-header{padding:2.5rem 2rem 1.5rem;}
+  .modal-body{padding:0 2rem 2.5rem;}
+}
+@media(max-width:640px){
+  .services-grid,.pricing-grid,.workflow-grid,.proj-grid,.proj-grid-2,.proj-featured{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<a href="https://wa.me/62083805299567?text=Hi%20CIKAEWEBS%2C%20Mau%20Tanya%20Pembuatan%20Website." class="wa-float" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Contact Us
+</a>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal" onclick="closeBD(event)">
+  <div class="modal" id="modal-inner">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+      <div class="modal-type" id="m-type"></div>
+      <div class="modal-brand" id="m-brand"></div>
+      <div class="modal-sub" id="m-sub"></div>
+    </div>
+    <div class="slide-viewer" id="slide-viewer">
+      <img id="slide-img" src="" alt="Project slide" loading="lazy">
+      <div class="slide-nav">
+        <button class="slide-btn" onclick="prevSlide()">&#8592;</button>
+        <button class="slide-btn" onclick="nextSlide()">&#8594;</button>
+      </div>
+      <div class="slide-counter" id="slide-counter"></div>
+    </div>
+    <div class="slide-dots" id="slide-dots"></div>
+    <div class="modal-body">
+      <div class="modal-divider"></div>
+      <div class="modal-desc" id="m-desc"></div>
+      <div class="modal-tags" id="m-tags"></div>
+      <a href="https://wa.me/62083805299567?text=Hi%20CIKAEWEBS%2C%20I%27m%20interested%20in%20a%20similar%20project." class="modal-wa" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Discuss a Similar Project
+      </a>
+    </div>
+  </div>
+</div>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/fricikaesgi/CIKAEWEBS/main/a%20(8).png" alt="Cikaestudio">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-mesh"></div>
+    <div class="hero-year">2025</div>
+    <h1 class="hero-h1">Jasa<br><em>Pembuatan</em><br>Website</h1>
+    <p class="hero-sub">Jasa pembuatan website terpercaya dengan desain modern dan SEO-friendly. Bikin Web Online siap bantu bisnis Kamu tampil profesional.</p>
+    <div class="hero-cta-group">
+      <a href="#portfolio" class="btn-rouge">See Our Work</a>
+      <a href="#pricing" class="btn-ghost">View Packages &#x2193;</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-mesh"></div>
+    <div class="hero-right-grid"></div>
+    <div class="hero-location">Bekasi · Jakarta</div>
+    <div class="hero-right-content">
+      <div class="hero-tagline">Buat web<br>kamu<br>sekarang.</div>
+      <div class="hero-stats">
+        <div><div class="stat-num">100+</div><div class="stat-label">Website Selesai</div></div>
+        <div><div class="stat-num">8</div><div class="stat-label">Tahun Pengalaman</div></div>
+        <div><div class="stat-num">98%</div><div class="stat-label">Tingkat Kepuasan</div></div>
+        <div><div class="stat-num">120+</div><div class="stat-label">Klien Puas</div></div>
+      </div>
+      <p class="hero-note">CIKAEWEBS &nbsp;·&nbsp; Bekasi &amp; Jakarta<br>Solusi website terpercaya untuk bisnis yang ingin tumbuh secara online.</p>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap"><div class="ticker">
+  <span class="ticker-item">Website Redesign</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Website Maintenance</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">SEO Optimization</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Landing Page</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Company Profile Website</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Influencer Management</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Marketing Strategy</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Website Redesign</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Website Maintenance</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">SEO Optimization</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Landing Page</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Company Profile Website</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Influencer Management</span><span class="ticker-sep">&#x2736;</span>
+  <span class="ticker-item">Marketing Strategy</span><span class="ticker-sep">&#x2736;</span>
+</div></div>
+
+<section class="about" id="about">
+  <div class="reveal"><div class="sl">Our Story</div><div class="st">Website<br>untuk Brand<br><em>yang Berkesan.</em></div></div>
+  <div class="about-grid">
+    <div class="reveal">
+      <p class="about-body">CIKAEWEBS adalah jasa pembuatan website profesional yang hadir untuk membantu bisnis, UMKM, startup, hingga personal brand membangun kehadiran digital yang kuat dan terpercaya.</p>
+      <p class="about-body">Lebih dari sekadar penyedia jasa, Bikin Web Online adalah partner digital yang berkomitmen untuk menghadirkan solusi website yang mudah, responsif, dan SEO-friendly.</p>
+      <div class="about-quote">"Menciptakan Website melalui ide yang didasari kreativitas, dan kepercayaan."</div>
+    </div>
+    <div class="reveal">
+      <div class="value-item"><div class="v-label">Vision</div><div class="v-title">Memperkuat Kehadiran Digital</div><div class="v-text">Membantu bisnis dari berbagai skala memiliki website profesional yang mampu meningkatkan visibilitas dan kredibilitas di dunia digital.</div></div>
+      <div class="value-item"><div class="v-label">Mission</div><div class="v-title">Mendorong Pertumbuhan Bisnis</div><div class="v-text">Menghadirkan solusi website yang dirancang untuk meningkatkan performa bisnis dan mengubah pengunjung menjadi pelanggan.</div></div>
+      <div class="value-item"><div class="v-label">Our DNA</div><div class="v-title">Membangun Kepercayaan Melalui Inovasi</div><div class="v-text">Menjadi partner digital terpercaya dengan menyediakan layanan yang inovatif, transparan, dan berorientasi pada kepuasan klien.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="svc-mesh"></div>
+  <div class="services-header">
+    <div class="reveal"><div class="sl light">What We Do</div><div class="st white">Wujudkan Brand<br>Kamu di <em>Dunia Digital.</em></div></div>
+    <p class="services-intro reveal">Kami merancang dan mengembangkan website profesional yang membantu brand untuk terhubung secara bermakna dengan audiensnya.</p>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card reveal"><div class="svc-n">01</div><div class="svc-name">Web Design</div><div class="svc-text">Desain website yang modern, menarik, dan sesuai dengan identitas brand Anda.</div><div class="svc-arrow">&#x2197;</div></div>
+    <div class="svc-card reveal"><div class="svc-n">02</div><div class="svc-name">Web Development</div><div class="svc-text">Pengembangan website yang cepat, responsif, dan berfungsi dengan optimal di semua perangkat.</div><div class="svc-arrow">&#x2197;</div></div>
+    <div class="svc-card reveal"><div class="svc-n">03</div><div class="svc-name">Company Profile Website</div><div class="svc-text">Membangun website profesional untuk meningkatkan kredibilitas dan kepercayaan bisnis Anda.</div><div class="svc-arrow">&#x2197;</div></div>
+    <div class="svc-card reveal"><div class="svc-n">04</div><div class="svc-name">E-Commerce Development</div><div class="svc-text">Membuat toko online yang aman, mudah digunakan, dan siap meningkatkan penjualan.</div><div class="svc-arrow">&#x2197;</div></div>
+    <div class="svc-card reveal"><div class="svc-n">05</div><div class="svc-name">Landing Page</div><div class="svc-text">Halaman khusus yang dirancang untuk kampanye pemasaran dan meningkatkan konversi.</div><div class="svc-arrow">&#x2197;</div></div>
+    <div class="svc-card reveal"><div class="svc-n">06</div><div class="svc-name">SEO Optimization</div><div class="svc-text">Mengoptimalkan website agar lebih mudah ditemukan di mesin pencari seperti Google.</div><div class="svc-arrow">&#x2197;</div></div>
+    <div class="svc-card reveal"><div class="svc-n">07</div><div class="svc-name">Website Maintenance</div><div class="svc-text">Layanan pemeliharaan untuk memastikan website tetap aman, cepat, dan selalu diperbarui.</div><div class="svc-arrow">&#x2197;</div></div>
+    <div class="svc-card reveal"><div class="svc-n">08</div><div class="svc-name">Website Redesign</div><div class="svc-text">Memperbarui tampilan dan performa website lama agar lebih modern dan efektif.</div><div class="svc-arrow">&#x2197;</div></div>
+  </div>
+</section>
+
+<section class="workflow" id="workflow">
+  <div class="wf-mesh"></div>
+  <div class="reveal"><div class="sl">How We Work</div><div class="st">Langkah Kami Mewujudkan<br><em>Website Kamu.</em></div></div>
+  <div class="workflow-grid">
+    <div class="wf-step reveal"><div class="wf-num">01</div><div class="wf-line"></div><div class="wf-title">Konsultasi</div><div class="wf-text">Memahami kebutuhan bisnis dan tujuan website Anda secara menyeluruh.</div></div>
+    <div class="wf-step reveal"><div class="wf-num">02</div><div class="wf-line"></div><div class="wf-title">Perencanaan</div><div class="wf-text">Merancang struktur dan tampilan website yang sesuai dengan identitas brand.</div></div>
+    <div class="wf-step reveal"><div class="wf-num">03</div><div class="wf-line"></div><div class="wf-title">Pengembangan</div><div class="wf-text">Pengembangan website berkualitas tinggi yang siap meningkatkan performa brand Anda.</div></div>
+    <div class="wf-step reveal"><div class="wf-num">04</div><div class="wf-line"></div><div class="wf-title">Peluncuran &amp; Dukungan</div><div class="wf-text">Meluncurkan website dan memberikan dukungan teknis agar tetap optimal.</div></div>
+  </div>
+</section>
+
+<section class="portfolio" id="portfolio">
+  <div class="port-mesh"></div>
+  <div class="reveal" style="position:relative;z-index:1;">
+    <div class="sl light">Selected Projects</div>
+    <div class="st white">Karya Terpilih<br>yang Mewujudkan Identitas<em>Digital.</em></div>
+    <p class="portfolio-intro">Dari ide sederhana hingga website profesional. Klik proyek mana pun untuk melihat hasil karya kami.</p>
+  </div>
+  <div class="portfolio-tabs reveal">
+    <button class="ptab active" onclick="switchTab('social',this)">Standard</button>
+    <button class="ptab" onclick="switchTab('content',this)">Momentum</button>
+    <button class="ptab" onclick="switchTab('marketing',this)">Dominance</button>
+    <button class="ptab" onclick="switchTab('branding',this)">E-Commerce</button>
+  </div>
+  <div class="portfolio-panels">
+
+    <div class="ppanel active" id="panel-social">
+      <div class="proj-grid">
+        <div class="proj-card reveal" onclick="openModal('desound-smm')"><div class="proj-num">01</div><div class="proj-type">Social Media Design &amp; Management</div><div class="proj-brand">Desound Bali</div><div class="proj-tag">Premium Audio &middot; Bali</div><div class="proj-desc">We built Desound's entire digital presence from scratch, establishing them as Bali's leading premium audio lifestyle brand and official JBL partner.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('hellowettr')"><div class="proj-num">02</div><div class="proj-type">Social Media Design &amp; Management</div><div class="proj-brand">hellowettr</div><div class="proj-tag">Sexual Wellness &middot; Germany &middot; Global</div><div class="proj-desc">A German wellness brand targeting EU, USA, and the Philippines. Social management, packaging, product photography, and campaign strategy.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('betterplace')"><div class="proj-num">03</div><div class="proj-type">Social Media Design &amp; Management</div><div class="proj-brand">betterplace.cc</div><div class="proj-tag">Real Estate &middot; Bali &middot; 30K+ Views</div><div class="proj-desc">Bali real estate brand. We produced 2 original videos that reached 30K+ organic views, backed by full strategy and content creation.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('raar')"><div class="proj-num">04</div><div class="proj-type">Social Media Design</div><div class="proj-brand">RAAR</div><div class="proj-tag">Local Beauty Brand &middot; Indonesia</div><div class="proj-desc">Bold social media design for a local beauty brand with a strong personality. We built their visual identity across platforms.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('manggang')"><div class="proj-num">05</div><div class="proj-type">Social Media Design</div><div class="proj-brand">Manggang</div><div class="proj-tag">F&amp;B &middot; Korean Food</div><div class="proj-desc">Carousel content and social designs that made Korean food impossible to scroll past. Warm, appetizing, culturally on point.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('livingnatural')"><div class="proj-num">06</div><div class="proj-type">Social Media Design</div><div class="proj-brand">Living Natural Way</div><div class="proj-tag">Health &amp; Wellness</div><div class="proj-desc">A wellness brand that needed calm, trustworthy content. We built a clean visual language that grew their audience through consistency.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+      </div>
+      <div class="portfolio-cta"><p class="portfolio-cta-text">Ready to be our next success story?</p><a href="#contact" class="btn-outline-light">Start a Project</a></div>
+    </div>
+
+    <div class="ppanel" id="panel-content">
+      <div class="proj-featured">
+        <div class="proj-card reveal" onclick="openModal('adria')"><div class="proj-type">Content Production &middot; Featured</div><div class="proj-brand">Adria Jewelry</div><div class="proj-tag">European-Inspired Fine Jewelry &middot; Born in Bali</div><div class="proj-desc">We led the brand's very first product photography session, art-directing a launch campaign that gave Adria Jewelry a visual identity to grow from. Every frame was built to feel elegant, premium, and unmistakably feminine.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('desound-cp')"><div class="proj-type">Content Production &middot; Featured</div><div class="proj-brand">Desound Bali</div><div class="proj-tag">Premium Audio Retail &middot; Official JBL Partner</div><div class="proj-desc">End-to-end content production for Bali's leading premium audio showroom. Photo, video, and creative direction balancing world-class audio credibility with Bali's lifestyle energy.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card reveal" onclick="openModal('purpl')"><div class="proj-num">03</div><div class="proj-type">Content Production</div><div class="proj-brand">PURPL</div><div class="proj-tag">Asian Fusion Restaurant &middot; Bali</div><div class="proj-desc">Creative direction and content production that turned first-time viewers into first-time guests at this vibrant Bali dining destination.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('mouldfree')"><div class="proj-num">04</div><div class="proj-type">Content Production</div><div class="proj-brand">Mould Free Living</div><div class="proj-tag">Health &amp; Home &middot; TikTok</div><div class="proj-desc">TikTok content strategy and production for a health-focused home brand. Educational, engaging, and built to earn trust with every scroll.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('adria')"><div class="proj-num">05</div><div class="proj-type">Content Production</div><div class="proj-brand">Adria Jewelry</div><div class="proj-tag">Gold &amp; Silver Collections &middot; Ongoing</div><div class="proj-desc">Ongoing content production for Adria's gold and silver collections. Every shoot reinforces the same refined elegance the brand is built on.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+      </div>
+      <div class="portfolio-cta"><p class="portfolio-cta-text">Let's create content that converts.</p><a href="#contact" class="btn-outline-light">Start a Project</a></div>
+    </div>
+
+    <div class="ppanel" id="panel-marketing">
+      <div class="proj-grid-2">
+        <div class="proj-card reveal" onclick="openModal('gudanggaram')"><div class="proj-type">Campaign Management</div><div class="proj-brand">Gudang Garam &times; Philip Works</div><div class="proj-tag">Brand Collaboration &middot; National Campaign</div><div class="proj-desc">A brand identity collaboration built around masculinity, freedom, and brotherhood. We developed the full visual identity and creative direction for this national campaign.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('pertamina')"><div class="proj-type">Event Organization &amp; Production</div><div class="proj-brand">Pertamina &times; AKHLAK BUMN</div><div class="proj-tag">National Corporate Event &middot; Jakarta</div><div class="proj-desc">End-to-end event production for a national BUMN initiative. Concept, creative direction, stage design, and full on-site execution.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('jcreativehub')"><div class="proj-type">Campaign Management</div><div class="proj-brand">Jakarta Creative Hub</div><div class="proj-tag">Government Collaboration &middot; Social Campaign</div><div class="proj-desc">An end-to-end campaign supporting SME growth and raising awareness around social issues. Strategy through execution in collaboration with a government agency.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('apimuda')"><div class="proj-type">Internal Branding Campaign</div><div class="proj-brand">APIMUDA Indonesia</div><div class="proj-tag">Internal Branding &middot; Jakarta</div><div class="proj-desc">A full internal branding campaign for APIMUDA Indonesia. Strategy, creative direction, and on-ground execution to make organizational values feel lived-in.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+      </div>
+      <div class="portfolio-cta"><p class="portfolio-cta-text">Big campaigns start with the right partner.</p><a href="#contact" class="btn-outline-light">Start a Project</a></div>
+    </div>
+
+    <div class="ppanel" id="panel-branding">
+      <div class="proj-grid">
+        <div class="proj-card reveal" onclick="openModal('terra')"><div class="proj-num">01</div><div class="proj-type">Brand Identity</div><div class="proj-brand">Terra Bakery &amp; Kitchen</div><div class="proj-tag">Bakery Caf&eacute; &middot; Bali &middot; Beachside</div><div class="proj-desc">A warm, grounded brand identity for a beachside bakery in Bali. Built for surfers and tourists who want something real and beautiful.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('dupaharum')"><div class="proj-num">02</div><div class="proj-type">Brand Identity</div><div class="proj-brand">Dupa Harum Giri</div><div class="proj-tag">Fragrant Incense &middot; Bali &middot; Spiritual</div><div class="proj-desc">A sacred, considered brand identity for a Balinese incense brand. Rooted in ritual culture, designed to feel meaningful every time it is used.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+        <div class="proj-card reveal" onclick="openModal('astros')"><div class="proj-num">03</div><div class="proj-type">Brand Identity</div><div class="proj-brand">Astros Academy</div><div class="proj-tag">Youth Football Academy</div><div class="proj-desc">A brand identity built for ambition. For a youth football academy, we created a visual system the players are proud to wear and the coaches trust.</div><div class="proj-open">View Project <span class="arr">&#x2197;</span></div></div>
+      </div>
+      <div class="portfolio-cta"><p class="portfolio-cta-text">Your brand identity starts here.</p><a href="#contact" class="btn-outline-light">Start a Project</a></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="reveal"><div class="sl">Investment</div><div class="st">Website Profesional,<br><em>Sesuai Kebutuhan Kamu.</em></div><p class="pricing-subtitle">Pilih paket website yang sesuai dengan kebutuhan bisnis Kamu dan mulai bangun kehadiran digital yang profesional dan terpercaya.</p></div>
+  <div class="pricing-grid">
+    <div class="pkg reveal"><div class="pkg-name">Standard</div><div class="pkg-tagline">The right starting point for brands ready to grow.</div><div class="pkg-price">Rp1.750.000</div><div class="pkg-period">One-time payment</div><div class="pkg-feat"><span>&#x2736;</span>1 Halaman</div><div class="pkg-feat"><span>&#x2736;</span>Gratis Domain & Hosting Ekstensi .com</div><div class="pkg-feat"><span>&#x2736;</span>SEO Friendly</div><div class="pkg-feat"><span>&#x2736;</span>Desain Responsif</div><div class="pkg-feat"><span>&#x2736;</span>Email Profesional</div><div class="pkg-feat"><span>&#x2736;</span>Akses Web & cPanel</div><div class="pkg-feat"><span>&#x2736;</span>Multi Language (Google Translate)</div><a href="#contact" class="pkg-btn">Get Started</a></div>
+    <div class="pkg reveal"><div class="pkg-name">Momentum</div><div class="pkg-tagline">For brands committed to consistent, professional growth.</div><div class="pkg-price">Rp2.250.000</div><div class="pkg-period">One-time payment</div><div class="pkg-feat"><span>&#x2736;</span>5 Halaman</div><div class="pkg-feat"><span>&#x2736;</span>Gratis Domain & Hosting Ekstensi .com</div><div class="pkg-feat"><span>&#x2736;</span>7 SEO Friendly</div><div class="pkg-feat"><span>&#x2736;</span>Desain Responsif</div><div class="pkg-feat"><span>&#x2736;</span>Email Profesional</div><div class="pkg-feat"><span>&#x2736;</span>Akses Web & cPanel</div><div class="pkg-feat"><span>&#x2736;</span>Multi Language (Google Translate)</div><a href="#contact" class="pkg-btn">Get Started</a></div>
+    <div class="pkg hero-pkg reveal"><div class="pkg-badge">Most Popular</div><div class="pkg-name">Dominance</div><div class="pkg-tagline">Premium content, full campaigns, and complete social management.</div><div class="pkg-price">Rp3.250.000</div><div class="pkg-period">One-time payment</div><div class="pkg-feat"><span>&#x2736;</span>10 Halaman</div><div class="pkg-feat"><span>&#x2736;</span>Gratis Domain & Hosting Ekstensi .com</div><div class="pkg-feat"><span>&#x2736;</span>SEO Friendly</div><div class="pkg-feat"><span>&#x2736;</span>Desain Responsif</div><div class="pkg-feat"><span>&#x2736;</span>Email Profesional</div><div class="pkg-feat"><span>&#x2736;</span>Akses Web & cPanel</div><div class="pkg-feat"><span>&#x2736;</span>Multi Language (Google Translate)</div><a href="#contact" class="pkg-btn">Get Started</a></div>
+    <div class="pkg reveal"><div class="pkg-name">E-Commerce</div><div class="pkg-tagline">Total brand domination for those who play to lead.</div><div class="pkg-price">Rp3.250.000</div><div class="pkg-period">One-time payment</div><div class="pkg-feat"><span>&#x2736;</span>10 Halaman</div><div class="pkg-feat"><span>&#x2736;</span>Gratis Domain & Hosting Ekstensi .com</div><div class="pkg-feat"><span>&#x2736;</span>SEO Friendly</div><div class="pkg-feat"><span>&#x2736;</span>Desain Responsif</div><div class="pkg-feat"><span>&#x2736;</span>Email Profesional</div><div class="pkg-feat"><span>&#x2736;</span>Akses Web & cPanel</div><div class="pkg-feat"><span>&#x2736;</span>Payment Gateway</div><a href="#contact" class="pkg-btn">Get Started</a></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-mesh"></div>
+  <div class="contact-grid">
+    
+    <!-- Contact Information -->
+    <div class="reveal">
+      <div class="sl muted">Let's Begin</div>
+      <div class="st white">Bangun brand<br>kamu<br><em>sekarang.</em></div>
+      <p class="contact-body">
+        Bangun brand kamu sekarang untuk menciptakan identitas yang kuat dan menonjol di tengah persaingan. 
+        Saatnya membuat bisnismu lebih dikenal dan dipercaya.
+      </p>
+
+      <div class="contact-detail">
+        <div class="cd-label">WhatsApp</div>
+        <div class="cd-val">
+          <a href="https://wa.me/6283805299567" target="_blank">0838 0529 9567</a>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="cd-label">Email</div>
+        <div class="cd-val">
+          <a href="mailto:fricikaesgi@gmail.com">fricikaesgi@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="cd-label">Instagram</div>
+        <div class="cd-val">
+          <a href="https://www.instagram.com/jasabikinweb.indo/" target="_blank">@cikaewebs</a>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="cd-label">Office</div>
+        <div class="cd-val small" style="color:rgba(255,255,255,.32);">
+          Jl. Raya Hankam, Pondok Jatimurni, Bekasi 17431
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="reveal">
+      <form action="https://formspree.io/f/xgorodbe" method="POST">
+        
+        <label class="fl">Your Name</label>
+        <input type="text" name="name" class="fi" placeholder="Sari Dewi" required>
+
+        <label class="fl">Email or WhatsApp</label>
+        <input type="text" name="contact" class="fi" placeholder="hello@yourbrand.com" required>
+
+        <label class="fl">Brand Name</label>
+        <input type="text" name="brand" class="fi" placeholder="Your Brand">
+
+        <label class="fl">Package You Are Interested In</label>
+        <select name="package" class="fsel" required>
+          <option value="">Select a package...</option>
+          <option>Standard — Rp1.750.000 (One-time payment)</option>
+          <option>Momentum — Rp2.250.000 (One-time payment)</option>
+          <option>Dominance — Rp3.250.000 (One-time payment)</option>
+          <option>E-Commerce — From Rp3.250.000 (One-time payment)</option>
+        </select>
+
+        <label class="fl">Tell Us About Your Brand</label>
+        <textarea name="message" class="fta"
+          placeholder="What are you building, and what does success look like for you?"
+          required></textarea>
+
+        <!-- Optional: Subject Email -->
+        <input type="hidden" name="_subject" value="New Website Enquiry - Cikae Webs">
+
+        <!-- Optional: Disable CAPTCHA (hapus jika ingin proteksi spam) -->
+        <input type="hidden" name="_captcha" value="false">
+
+        <button type="submit" class="fsub">Send Your Enquiry</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="https://raw.githubusercontent.com/fricikaesgi/CIKAEWEBS/main/a%20(6).png" alt="Cikaewebs"></div>
+  <div class="footer-copy">&copy; 2025 Cikae Webs. All rights reserved.</div>
+  <div class="footer-links"><a href="#about">About</a><a href="#services">Services</a><a href="#portfolio">Work</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></div>
+  <div class="footer-socials"><a href="https://www.instagram.com/bikinwebonline/" class="soc">IG</a><a href="https://wa.me/62083805299567" class="soc">WA</a></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var PROJECTS = {"desound-smm": {"brand": "Desound Bali", "type": "Social Media Design & Management", "sub": "Premium Audio Lifestyle Showroom · Bali", "desc": "Desound Bali is a premium audio lifestyle showroom delivering an immersive high-end sound experience in Bali. We built their entire digital presence from scratch — content strategy, original creative, community management, and paid advertising working together to establish Desound as the go-to destination for serious audio enthusiasts in Indonesia.", "tags": ["Social Media Strategy", "Content Creation", "Community Management", "Paid Advertising", "Bali"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/267/thumbnail/0009.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T034429Z&X-Amz-Expires=90479&X-Amz-Signature=4743b0657775991a443f6ecd619191a3b4e8bef67163c323ca8bacd9abe42084&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0015.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T051109Z&X-Amz-Expires=84689&X-Amz-Signature=d364a84259a66dc4c9c43b12eeede9f4567db7f6eddb7ba499b25a0f6f417e8a&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0016.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T145239Z&X-Amz-Expires=52974&X-Amz-Signature=0a8787e6e17e293a2dc2d1bce0cf34ab676ea7d40fcb950ddb8b8d4d63d07b49&X-Amz-SignedHeaders=host"]}, "hellowettr": {"brand": "hellowettr", "type": "Social Media Design & Management", "sub": "Sexual Wellness Brand · Germany · Global", "desc": "hellowettr is a sexual wellness brand based in Germany, reaching audiences across the EU, USA, and the Philippines. We handled social media management, developed packaging design, coordinated product photography from Bali, and built a campaign strategy that spoke authentically to a global audience without losing the brand's personality.", "tags": ["Social Media Management", "Packaging Design", "Product Photography", "Campaign Strategy", "International"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0018.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T115401Z&X-Amz-Expires=61722&X-Amz-Signature=1905eef55aa788cc50b373a8d016f469d05bc1de20eb2b7093bd7c286edf79c7&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0023.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T193108Z&X-Amz-Expires=34443&X-Amz-Signature=8dac35ade64c43d7e0202938e94a27215443448928de53641e80520c4e6ae808&X-Amz-SignedHeaders=host"]}, "betterplace": {"brand": "betterplace.cc", "type": "Social Media Design & Management", "sub": "Real Estate · Bali", "desc": "betterplace.cc is a Bali-based real estate brand that needed to cut through a crowded market. We built their social strategy, produced original content, and created 2 videos that reached over 30,000 views organically — giving the brand genuine credibility and reach.", "tags": ["Social Media Management", "Campaign Strategy", "Video Production", "30K+ Organic Views"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0022.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T102256Z&X-Amz-Expires=66899&X-Amz-Signature=6488e16a02285000c90c83ebf24c47276b8c3928e208d6d4e3343d844c09dd8a&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0021.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T073903Z&X-Amz-Expires=77959&X-Amz-Signature=62e5c816caa536c9e36accaeba8225616d1a261dab74b5bad19d2e231e3957bb&X-Amz-SignedHeaders=host"]}, "raar": {"brand": "RAAR", "type": "Social Media Design", "sub": "Local Beauty Brand · Indonesia", "desc": "RAAR is a local beauty brand with a strong and distinctive personality. We crafted their social media visual identity and content to speak confidently to their audience, building a consistent and recognizable presence across platforms.", "tags": ["Social Media Design", "Visual Identity", "Content Strategy", "Local Beauty"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0020.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T165328Z&X-Amz-Expires=43464&X-Amz-Signature=cb1fa18ed8d5c050320440c113460360dc057b3bfd59a6b75ea12b80bda909a9&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0017.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T141021Z&X-Amz-Expires=52903&X-Amz-Signature=8de8429c642d8f603e15dce6f8ff8f9694a488bc4ad6329b7d667df9cab2fec0&X-Amz-SignedHeaders=host"]}, "manggang": {"brand": "Manggang", "type": "Social Media Design", "sub": "F&B · Korean Food", "desc": "Manggang is an F&B brand specializing in Korean food. We created carousel content and social media designs that brought warmth, appetite appeal, and cultural authenticity to every post — making the food impossible to scroll past.", "tags": ["Social Media Design", "Carousel Content", "F&B", "Korean Cuisine"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0017.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T141021Z&X-Amz-Expires=52903&X-Amz-Signature=8de8429c642d8f603e15dce6f8ff8f9694a488bc4ad6329b7d667df9cab2fec0&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0019.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260411%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260411T000650Z&X-Amz-Expires=18102&X-Amz-Signature=962db1563e19ae538145e2209af195f733df348afd41854aa35700221dab97c3&X-Amz-SignedHeaders=host"]}, "livingnatural": {"brand": "Living Natural Way", "type": "Social Media Design", "sub": "Health & Wellness", "desc": "Living Natural Way is a health and wellness brand whose social presence needed to reflect their values: purity, intention, and a natural way of living. We built a calm, trustworthy visual language that grew their audience through consistency and credibility.", "tags": ["Social Media Design", "Wellness Brand", "Content Strategy"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/212/thumbnail/0019.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260411%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260411T000650Z&X-Amz-Expires=18102&X-Amz-Signature=962db1563e19ae538145e2209af195f733df348afd41854aa35700221dab97c3&X-Amz-SignedHeaders=host"]}, "adria": {"brand": "Adria Jewelry", "type": "Content Production", "sub": "European-Inspired Fine Jewelry · Born in Bali", "desc": "Adria Jewelry is a European-inspired brand born in Bali, built around timeless elegance and artisanal craftsmanship. We led the brand's very first product photography session — a full launch shoot art-directed to capture the elegance, fine details, and premium character of each piece, establishing the visual identity from day one.", "tags": ["Product Photography", "Art Direction", "Launch Campaign", "Fine Jewelry", "Bali"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0020.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T174032Z&X-Amz-Expires=40147&X-Amz-Signature=eaed122dfc20dc88e43f435cfe757fb4b0776a762583f8115a6d7ce8d9a61123&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0021.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T091346Z&X-Amz-Expires=72318&X-Amz-Signature=7be975b75af3ec33b9255f5773462ce28aad156ac24f661d51fbf1984396bf58&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0022.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T090003Z&X-Amz-Expires=70963&X-Amz-Signature=1ca9095f6c98b8675073a18c77347b0c9f850170f00f9b5beed17d9b7cf7ebe2&X-Amz-SignedHeaders=host"]}, "desound-cp": {"brand": "Desound Bali", "type": "Content Production", "sub": "Premium Audio Retail · Official JBL Partner", "desc": "As Desound Bali's content partner, we led full creative production to position them as Indonesia's most credible premium music retail destination. Being an official JBL partner, the content had to reflect world-class audio standards while staying warm and community-oriented. We produced high-quality photo and video assets covering the showroom experience, product showcases, and lifestyle angles.", "tags": ["Photo Production", "Video Production", "Creative Direction", "Retail Brand", "JBL Partner"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0023.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T203917Z&X-Amz-Expires=29689&X-Amz-Signature=4f06a3bf5e56cead6697055ecac73ffd6c7daf7a2b647396da9491d8f9fcc6f3&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0024.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T093358Z&X-Amz-Expires=69076&X-Amz-Signature=76330e595c16147485eeaa59ba14a083fc72bcb38351dcf77041ae2cf59fc628&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/266/thumbnail/0025.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T190951Z&X-Amz-Expires=35141&X-Amz-Signature=dcd158ff1faed03952c8b74698575f389da807f748b33c001a5009598e9d065e&X-Amz-SignedHeaders=host"]}, "purpl": {"brand": "PURPL", "type": "Content Production", "sub": "Asian Fusion Restaurant · Bali", "desc": "PURPL is a vibrant Asian fusion restaurant in Bali. We handled creative direction and content production, capturing the atmosphere, plating artistry, and dining experience through compelling photo and video storytelling that turned first-time viewers into first-time guests.", "tags": ["Food Photography", "Video Production", "Creative Direction", "Restaurant", "Asian Fusion"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0026.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T091719Z&X-Amz-Expires=72736&X-Amz-Signature=637247a9db784c24c66c5dee0a3cadbb8a5cf2cf31d16ab1a84166cda7fdf05d&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/236/thumbnail/0029.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T062530Z&X-Amz-Expires=82166&X-Amz-Signature=a957caa9f798497bb9455251b1f2bbfce44973e35996393fd24720fb2cc56545&X-Amz-SignedHeaders=host"]}, "mouldfree": {"brand": "Mould Free Living", "type": "Content Production", "sub": "Health & Home · TikTok", "desc": "Mould Free Living needed to build authority on TikTok through educational, engaging short-form content. We developed the full content strategy and produced a series of videos that broke down a niche topic accessibly and shareably — building genuine trust with a growing audience.", "tags": ["TikTok Content Creation", "Short-Form Video", "Content Strategy", "Health Brand"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/242/thumbnail/0028.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T101004Z&X-Amz-Expires=67566&X-Amz-Signature=7dfc5ef2ae7372dca97b3fc49ba7c401024c4380d93383a078e19a710712ab0c&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/269/thumbnail/0029.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T180201Z&X-Amz-Expires=41507&X-Amz-Signature=b56b1b2b4d89f4aa94f7aa354690a998ae48c3acae9c5b1f0037b89fe4f1cdc9&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0030.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T160658Z&X-Amz-Expires=48425&X-Amz-Signature=803a98badfe0f7a7b99596bd6845c55f8b55af5d63d56f83e811d26a7868b96f&X-Amz-SignedHeaders=host"]}, "gudanggaram": {"brand": "Gudang Garam × Philip Works", "type": "Campaign Management", "sub": "Brand Collaboration · National Campaign", "desc": "A brand identity collaboration built around the shared spirit of masculinity, freedom, and brotherhood. The branding positions Philip Works denim as the natural choice for men who carry the raw energy of Gudang Garam Signature culture. We developed the full visual identity and creative direction, from typography to photography direction.", "tags": ["Brand Collaboration", "Visual Identity", "Creative Direction", "Campaign Management", "National"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/273/thumbnail/0032.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T114529Z&X-Amz-Expires=64219&X-Amz-Signature=aaab18326783520c4df5ea88af6a65f711dc0cfb06397c3efafa276b14a81763&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0032.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T233013Z&X-Amz-Expires=21688&X-Amz-Signature=816c8d3d20677049005bf7760aa6afdc24bef0b52461aef69d48bd70c42b3cec&X-Amz-SignedHeaders=host"]}, "pertamina": {"brand": "Pertamina × AKHLAK BUMN", "type": "Event Organization & Production", "sub": "National Corporate Event · Jakarta", "desc": "Pertamina partnered with AKHLAK by BUMN to strengthen core values across the BUMN ecosystem. Our team managed the event end to end: concept development, creative direction, stage design, logistics coordination, and full on-site execution at national scale.", "tags": ["Event Production", "Creative Direction", "Stage Design", "Logistics", "National Scale"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/236/thumbnail/0033.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T090429Z&X-Amz-Expires=72983&X-Amz-Signature=9b948d7d700a083dc6bf2ab53a43395241745905985852f6fc72a7194c082dab&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/242/thumbnail/0034.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T042624Z&X-Amz-Expires=89724&X-Amz-Signature=bf9ad7f08847c50a9f10e59209160fd32904fd06c535687743a65c8d0d9adaac&X-Amz-SignedHeaders=host"]}, "jcreativehub": {"brand": "Jakarta Creative Hub", "type": "Campaign Management", "sub": "Government Collaboration · Social Campaign", "desc": "In collaboration with a government agency at Jakarta Creative Hub, we ran a campaign supporting the growth of co-operatives and SMEs across Indonesia. The campaign tackled social issues including peer pressure, bullying, and self-love — weaving real meaning into the creative work. End-to-end delivery from strategy through execution.", "tags": ["Event Management", "Campaign Management", "Government Collaboration", "Social Impact", "SME Support"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/242/thumbnail/0035.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T154614Z&X-Amz-Expires=49268&X-Amz-Signature=8e6826cca5e6acd8f7c6b5cf85edd4c3df4f78d49d43e497dac50fc36ec667f8&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/242/thumbnail/0036.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T233943Z&X-Amz-Expires=17993&X-Amz-Signature=0715775c1c5f6de19f0cc34f6c1cf564a39ebb75281336f95efcc0791d8cbfcb&X-Amz-SignedHeaders=host"]}, "apimuda": {"brand": "APIMUDA Indonesia", "type": "Internal Branding Campaign", "sub": "Internal Branding · Jakarta", "desc": "APIMUDA Indonesia needed a creative internal branding campaign that would genuinely connect with their people. We managed and executed the full campaign — strategy, creative direction, and execution — to align the organization's internal culture with their brand values, making those values feel lived-in from the inside out.", "tags": ["Internal Branding", "Campaign Strategy", "Creative Direction", "Execution", "Jakarta"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0037.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T204633Z&X-Amz-Expires=30749&X-Amz-Signature=d90e5ac6191c02a0461b6d12a44cfd8778cc1ea24e3c1567ff95de61fc53d68f&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0038.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T105535Z&X-Amz-Expires=63737&X-Amz-Signature=b5da7d8021b01fa841e5521ab5df12f3135631ed32b982359b286af7d93f37b4&X-Amz-SignedHeaders=host"]}, "terra": {"brand": "Terra Bakery & Kitchen", "type": "Brand Identity", "sub": "Bakery Café · Bali · Beachside", "desc": "Terra Bakery & Kitchen is a beachside bakery café in Bali, built for surfers, tourists, and anyone who wants something real and good. We created a warm, earthy brand identity that feels grounded and approachable — polished enough to stand out, honest enough to belong near the ocean.", "tags": ["Logo Design", "Brand Identity", "Color Palette", "Typography", "Hospitality", "Bali"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/183/thumbnail/0009.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T040040Z&X-Amz-Expires=88924&X-Amz-Signature=cd64be18cdf37adccab0a45ff80f1d4acd3e6899589b728c2bebe7226f8dc1ed&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/183/thumbnail/0010.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T164112Z&X-Amz-Expires=44242&X-Amz-Signature=bde9a15e828738384d1cd8d94fafe23ecfbd8cd4cfb73d41aef14edf25ee139d&X-Amz-SignedHeaders=host"]}, "dupaharum": {"brand": "Dupa Harum Giri", "type": "Brand Identity", "sub": "Fragrant Incense · Bali · Spiritual", "desc": "Dupa Harum Giri is a brand of fragrant incense from Bali, created specifically for spiritual use. The identity draws from Balinese ritual culture to feel sacred and considered — something people reach for not just for its scent, but for what it means.", "tags": ["Logo Design", "Brand Identity", "Cultural Design", "Spiritual Brand", "Bali Heritage"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/183/thumbnail/0010.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T164112Z&X-Amz-Expires=44242&X-Amz-Signature=bde9a15e828738384d1cd8d94fafe23ecfbd8cd4cfb73d41aef14edf25ee139d&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/183/thumbnail/0011.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T100422Z&X-Amz-Expires=67213&X-Amz-Signature=7175d38ed1acafeddd7d21a71684c7ed174cfd4610db646897600051eba560ed&X-Amz-SignedHeaders=host"]}, "astros": {"brand": "Astros Academy", "type": "Brand Identity", "sub": "Youth Football Academy", "desc": "Astros Academy is a community of young football players who push each other to grow. The brand identity captures the spirit of ambition and teamwork — something the players are proud to wear and the coaches trust to represent what they are building together.", "tags": ["Logo Design", "Brand Identity", "Sports Brand", "Youth Community", "Visual Identity"], "slides": ["https://document-export.canva.com/W7dIE/DAG4QoW7dIE/183/thumbnail/0011.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T100422Z&X-Amz-Expires=67213&X-Amz-Signature=7175d38ed1acafeddd7d21a71684c7ed174cfd4610db646897600051eba560ed&X-Amz-SignedHeaders=host", "https://document-export.canva.com/W7dIE/DAG4QoW7dIE/265/thumbnail/0042.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260411%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260411T022542Z&X-Amz-Expires=9395&X-Amz-Signature=6da0f8e8e44c34826911e05a93ed0f4f052f01a72dddc01cf7528f7663fb21de&X-Amz-SignedHeaders=host"]}};
+
+// CURSOR
+var cur=document.getElementById('cur'),ring=document.getElementById('ring');
+var mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a,button,.svc-card,.pkg,.proj-card').forEach(function(el){
+  el.addEventListener('mouseenter',function(){ring.style.width='52px';ring.style.height='52px';cur.style.transform='translate(-50%,-50%) scale(1.8)';});
+  el.addEventListener('mouseleave',function(){ring.style.width='32px';ring.style.height='32px';cur.style.transform='translate(-50%,-50%) scale(1)';});
+});
+
+// NAV
+window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);});
+
+// REVEAL
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(r){obs.observe(r);});
+document.querySelectorAll('.svc-card,.pkg,.proj-card').forEach(function(el,i){el.style.transitionDelay=(i%4)*.07+'s';});
+
+// TABS
+function switchTab(id,btn){
+  document.querySelectorAll('.ptab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.ppanel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('#panel-'+id+' .reveal').forEach(function(r){r.classList.remove('in');setTimeout(function(){r.classList.add('in');},60);});
+}
+
+// MODAL + SLIDE VIEWER
+var currentSlides=[];
+var currentSlideIdx=0;
+
+function openModal(key){
+  var p=PROJECTS[key];
+  if(!p)return;
+  document.getElementById('m-type').textContent=p.type;
+  document.getElementById('m-brand').textContent=p.brand;
+  document.getElementById('m-sub').textContent=p.sub;
+  document.getElementById('m-desc').textContent=p.desc;
+  var tagsEl=document.getElementById('m-tags');
+  tagsEl.innerHTML=p.tags.map(function(t){return'<span class="modal-tag">'+t+'</span>';}).join('');
+  currentSlides=p.slides||[];
+  currentSlideIdx=0;
+  var viewer=document.getElementById('slide-viewer');
+  if(currentSlides.length>0){
+    viewer.style.display='block';
+    updateSlide();
+  }else{
+    viewer.style.display='none';
+    document.getElementById('slide-dots').innerHTML='';
+  }
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('modal-inner').scrollTop=0;
+}
+
+function updateSlide(){
+  if(currentSlides.length===0)return;
+  document.getElementById('slide-img').src=currentSlides[currentSlideIdx];
+  document.getElementById('slide-counter').textContent=(currentSlideIdx+1)+' / '+currentSlides.length;
+  var dots=document.getElementById('slide-dots');
+  dots.innerHTML='';
+  currentSlides.forEach(function(_,i){
+    var d=document.createElement('button');
+    d.className='slide-dot'+(i===currentSlideIdx?' active':'');
+    d.onclick=function(){currentSlideIdx=i;updateSlide();};
+    dots.appendChild(d);
+  });
+}
+
+function prevSlide(){if(currentSlides.length===0)return;currentSlideIdx=(currentSlideIdx-1+currentSlides.length)%currentSlides.length;updateSlide();}
+function nextSlide(){if(currentSlides.length===0)return;currentSlideIdx=(currentSlideIdx+1)%currentSlides.length;updateSlide();}
+
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+function closeBD(e){if(e.target===document.getElementById('modal'))closeModal();}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+</script>
+ <script>
+document.addEventListener('DOMContentLoaded', function(){
+
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-links');
+
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', function(){
+
+        toggle.classList.toggle('active');
+        menu.classList.toggle('active');
+
+    });
+
+    const links = menu.querySelectorAll('a');
+
+    links.forEach(function(link){
+
+        link.addEventListener('click', function(){
+
+            toggle.classList.remove('active');
+            menu.classList.remove('active');
+
+        });
+
+    });
+
+});
+</script>
+</body>
+</html>
